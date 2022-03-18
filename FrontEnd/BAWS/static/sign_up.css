@@ -1,0 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.hero{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+.form-box{
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    background: #fff;
+    padding: 5px;
+}
+.navTit {
+    text-decoration: none;
+    border: 2px solid #222222;
+    background-color: #444444;
+    color: #ffffff;
+    text-align: center;
+    font-size: 50px;
+    width: 100%;
+    height: 100px;
+    float: left;
+    top: 70px;
+}
+.navButt {
+    text-decoration: none;
+    border: 2px solid #222222;
+    background-color: #444444;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    width: 20%;
+    height: 120px;
+    float: left;
+}
+.input-field{
+    width: 25%;
+    box-align: center;
+    padding: 10px 10px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    border: 1;
+    background: transparent;
+}
+
+.submit-btn{
+    width: 25%;
+    box-align: center;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    border: 0;
+    outline: none;
+}
+
+.label_Move{
+    top: 20%;
+    font-size: 10px;
+    text-align: center;
+}
+
+#sign_up{
+    box-align: center;
+    left: 100px;
+}
