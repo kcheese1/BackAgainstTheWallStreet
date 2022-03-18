@@ -18,14 +18,20 @@
             <div class="label_Move">
                     <h1>Username</h1>
                 <br>
-                <input id="USERNAME" name="Username" type="text" class="input-field" placeholder="Username" required>
+                <input id="USERNAME" name="UsernameL" type="text" class="input-field" placeholder="Username" required>
                     <h1 id = "Password_Header">Password</h1>
                 <br>
-                <input id="PASSWORD" name="Password" type="text" class="input-field" placeholder="Password" required>
+                <input id="PASSWORD" name="PasswordL" type="text" class="input-field" placeholder="Password" required>
                 <br>
                 <button type="submit" class="submit-btn">Login</button>
+                <span id = "log_to_sign"><a>Don't have an account? Sign up</a> 
+                    <a href = "{{ url_for('views.sign_up')}}">here!</a>
+                </span>
             </div>
+            
         </form>
+            
+        
         </div>
     </body>
 </html>

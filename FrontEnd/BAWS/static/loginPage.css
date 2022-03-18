@@ -84,3 +84,7 @@ width: 100%;
 #Password_Header{
     padding-top: 5%;
 }
+#log_to_sign{
+   text-align: center;
+   font-size: 14px;
+}
