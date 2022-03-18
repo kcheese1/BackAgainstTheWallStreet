@@ -50,6 +50,7 @@ width: 100%;
     width: 25%;
     box-align: center;
     padding: 10px 10px;
+    border-top: 5%;
     cursor: pointer;
     display: block;
     margin: auto;
@@ -64,6 +65,7 @@ width: 100%;
     cursor: pointer;
     display: block;
     margin: auto;
+    margin-top: 5%;
     border: 0;
     outline: none;
 }
@@ -75,5 +77,10 @@ width: 100%;
 }
 
 #Base_Div{
-    padding-top: 15%;
+    padding-top: 10%;
+}
+
+
+#Password_Header{
+    padding-top: 5%;
 }
