@@ -1,5 +1,32 @@
-<!-- login page --> 
-<!-- Author: Daniel Saviet-->
-<!-- Date: 3/14/2022-->
-<!-- Description: Login Page Objects-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/loginPage.css') }}">
+    </head>
+    <header>
+        <nav>
+            <div class="navTit">
+                <h1>Back Against Wall Street</h1>
+            </div>
+        </nav>
+    </header>
+    <body>
+        <div id = "Base_Div">
+        <form method="POST" id = "login_form">
+            <div class="label_Move">
+                    <h1>Username</h1>
+                <br>
+                <input id="USERNAME" name="Username" type="text" class="input-field" placeholder="Username" required>
+                    <h1>Password</h1>
+                <br>
+                <input id="PASSWORD" name="Password" type="text" class="input-field" placeholder="Password" required>
+                <button type="submit" class="submit-btn">Login</button>
+            </div>
+        </form>
+        </div>
+    </body>
+</html>
 
+<!-- action="" -->
