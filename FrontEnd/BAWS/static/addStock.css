@@ -1,0 +1,50 @@
+#ticker {
+    position: fixed;
+    left: 10%;
+    height: 5%;
+}
+
+#ticker_search {
+    position: fixed;
+    left: 10.2%;
+    width: 160px;
+    height: 5%;
+    top: 40%;
+}
+
+#AddToList {
+    position: fixed;
+    left: 10.2%;
+    width: 160px;
+    height: 5%;
+    top: 50%;
+}
+
+#checkHolderTicker {
+    position: fixed; 
+    top: 30%;
+    left: 5%;
+}
+
+#checkHolderWatchList {
+    position: fixed; 
+    top: 57%;
+    left: 15%;
+}
+
+#bigHolderStock {
+    width: 40%;
+    height: 35%;
+    position: fixed; 
+    top: 64%;
+    left: -5%;
+}
+
+#theChecksStock {
+    height: 100%;
+    width: 25%;
+    float: left;
+}
+label {
+    font-size: 20px;
+}

@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Back to Wall Street</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='../static/index.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/addStock.css') }}" />
     </head>
     <!-- Holds Navigation Bar-->
     <header>
@@ -14,24 +15,28 @@
 
             <button class="navTit">Back Against Wall Street</button>
         
-            <button class="navButt">
-                <a href="{{ url_for('views.addStock') }}">AddStock</a>
-            </button>
+            <button class="navButt">Add Stock</button>
             <button class="navButt">Help Desk</button>
 
         </nav>
     </header>
     <body>
         <!--Big Holder holds all contents of the Page-->
-        <div id="bigHolder">
-            <div id="theChecks">
-                <div id="checkHolder">
+        <div id="bigHolderStock">
+            <div id="theChecksStock">
+                <div id="checkHolderTicker">
                     <!--Forms which holds all Checkboxes-->
                     <form action="/action_page.php">
-                        <input type="checkbox" id="test1" name="test1" value="Test">
-                        <label for="test1"> Test 1</label><br>
-                        <input type="checkbox" id="test2" name="test2" value="Test">
-                        <label for="test2"> Test 2</label><br>
+                        <label for="test1">Ticker:</label>
+                        <input id="ticker" name="Ticker" type="text" class="input-field" placeholder="TCKR">
+                        <button id="ticker_search" class="input-field">Search</button>
+                        <button id="AddToList" class="input-field">Add to list</button>
+                      </form>
+                </div>
+                <div id="checkHolderWatchList">
+                    <!--Forms which holds all Checkboxes-->
+                    <form action="/action_page.php">
+                        <label for="test2">Watch List</label><br>
                       </form>
                 </div>
             </div>
@@ -55,21 +60,6 @@
                     </tr>
                     <tr>
                         <td>5. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>6. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>7. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>8. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>9. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>10. Stock</td>
                     </tr>
                 </table>
             </div>

@@ -39,7 +39,6 @@ def user_data():
             sign_up_file.to_csv('FrontEnd/BAWS/FileStorage/user.csv', index=False)
             return redirect(url_for('views.home'))
     return render_template('sign_up.html')
-    
 
 def create_app():
     

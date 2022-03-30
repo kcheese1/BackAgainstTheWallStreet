@@ -13,3 +13,7 @@ def sign_up():
 @views.route('/index')
 def index():
     return render_template("index.html")
+
+@views.route('/addStock')
+def addStock():
+    return render_template("addStock.html")
