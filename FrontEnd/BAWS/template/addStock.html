@@ -26,12 +26,11 @@
             <div id="theChecksStock">
                 <div id="checkHolderTicker">
                     <!--Forms which holds all Checkboxes-->
-                    <form action="/action_page.php">
+                    <form method="POST">
                         <label for="test1">Ticker:</label>
-                        <input id="ticker" name="Ticker" type="text" class="input-field" placeholder="TCKR">
-                        <button id="ticker_search" class="input-field">Search</button>
-                        <button id="AddToList" class="input-field">Add to list</button>
-                      </form>
+                        <input id="ticker_text" name="Tickers" type="text" class="input-field" placeholder="TCKR">
+                        <button id="ticker_search" name="Ticker" type="submit" class="submit-btn">Search</button>  
+                    </form>
                 </div>
                 <div id="checkHolderWatchList">
                     <!--Forms which holds all Checkboxes-->

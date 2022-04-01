@@ -7,6 +7,7 @@ shortTermTrend = [] # List that Compares Present Day Stock Price to Previous Day
 midTermTrend = [] # List that Compares Present Day Stock Price to Previous Month's Stock Price
 
 # Holds list of all Stock Tickers
+
 tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
 tickers = yf.Tickers(tickers_list)
 
@@ -14,7 +15,7 @@ tickers = yf.Tickers(tickers_list)
 df = tickers.download(group_by='tickers')
 
 # Prints EBAY Info
-#print(df['EBAY'])
+print(df['EBAY'])
 
 # Converts to uppercase
 tickers_list = [x.upper() for x in tickers_list]

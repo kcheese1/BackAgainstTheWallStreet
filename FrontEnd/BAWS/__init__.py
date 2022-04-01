@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Blueprint, redirect, url_for
 import pandas as pd
 from os import path
+import yfinance as yf
 import sys
 
 app = Flask(__name__)
@@ -11,9 +12,8 @@ def getLoginData():
         USERNAME = str(request.form['UsernameL'])
         PASSWORD = str(request.form['PasswordL'])
         user_table = pd.read_csv('FrontEnd/BAWS/FileStorage/user.csv')
-        
         if USERNAME in user_table["Username"].values and PASSWORD in user_table["Password"].values:
-             return redirect(url_for('views.index'))
+            return redirect(url_for('views.index'))
         print(user_table, file = sys.stderr)
     
     return render_template("loginPage.html")
@@ -39,6 +39,34 @@ def user_data():
             sign_up_file.to_csv('FrontEnd/BAWS/FileStorage/user.csv', index=False)
             return redirect(url_for('views.home'))
     return render_template('sign_up.html')
+
+@app.route('/addStock', methods=['GET', 'POST'])
+def stock_search():
+    if request.method == 'POST':
+        #ticker_list gives the list of stocks 
+        tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
+        #text is the stock that the user input
+        text = str(request.form['Tickers'])
+        
+        #print to see what the user has typed
+        print("The text is: ", text, file =sys.stderr)
+        
+        #searches yahoo finance for tickers from the ticker_list
+        tickers = yf.Tickers(tickers_list)
+        #prints the list of tickers from tickers
+        print(tickers, file =sys.stderr)
+        #adds whatever the user typed into the ticker_list
+        tickers_list.append(text)
+        #prints the list with the added ticker
+        print(tickers_list, file =sys.stderr)
+        
+        #downloads everything to do with tickers into the code so that we can use it
+        df = tickers.download(group_by='ticker')
+        #prints the info for the stock that the user typed in (SUPPOSED TO!!)
+        print(df[text.upper()], file =sys.stderr)
+        #df.plot.line()
+        return render_template("addStock.html")
+    return render_template("addStock.html")
 
 def create_app():
     

@@ -4,6 +4,14 @@
     height: 5%;
 }
 
+#ticker_text {
+    position: fixed;
+    left: 10.2%;
+    width: 160px;
+    height: 5%;
+    top: 30%;
+}
+
 #ticker_search {
     position: fixed;
     left: 10.2%;
