@@ -17,3 +17,7 @@ def index():
 @views.route('/addStock')
 def addStock():
     return render_template("addStock.html")
+
+@views.route('/recommend')
+def recommend():
+    return render_template("recommend_page.html")

@@ -1,0 +1,27 @@
+#plotID{
+    position:fixed;
+    float: right;
+    top:40%;
+    right: 10%;
+    height: 30%;
+    width: 30%;
+}
+#min_text{
+    width: 50%;
+}
+#max_text{
+    margin-top: 10%;
+    width: 50%;
+
+}
+#trend_text{
+    margin-top: 10%;
+    width: 50%;
+    margin-left: 25%;
+}
+
+#filter{
+    float: center;
+    margin-top: 10%;
+    margin-left: 50%;
+}

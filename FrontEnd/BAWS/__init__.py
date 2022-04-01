@@ -3,6 +3,7 @@ import pandas as pd
 from os import path
 import yfinance as yf
 import sys
+import matplotlib as plt
 
 app = Flask(__name__)
 
@@ -22,6 +23,46 @@ def getLoginData():
 @app.route('/index', methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
+
+
+@app.route('/recommend', methods=['GET', 'POST'])
+def recommend():
+    if request.method == 'POST':
+        min = request.form['min']
+        max = request.form['max']
+        trend = request.form.get('trend')
+        print("variables: " + min + max + trend,file=sys.stderr)
+        
+        if min != '' and max != '':
+            chosen_stock = ''
+            yearDF = pd.DataFrame()
+            tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx',
+                                'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
+            for tick in tickers_list:
+                onDayDF = yf.Ticker(tick).history(period='1d')
+                if float(max) >= onDayDF['Close'][-1] >= float(min):
+        
+                    yearDF = yf.Ticker(tick).history(period = '1y')
+                    if (trend == 'positive' and yearDF['Close'][0] < yearDF['Close'][-1]) or (trend == 'negative' and yearDF['Close'][0] > yearDF['Close'][-1]):
+                        chosen_stock = tick
+        
+
+            yearDF = yf.Ticker(chosen_stock).history(period = '1y')
+            #plots closing value over time for chosen stock
+            plot1 = yearDF['Close'].plot.line()
+            plot1.set_ylabel('Dollars')
+            plot1.set_title(chosen_stock.upper() + " Stock Value")
+            plt.figure(plot1).savefig("../images/plot1pic.png")
+            return render_template('recommend_page.html', error = "")
+        else:
+            return render_template('recommend_page.html', error = "Please fill in minimum and maximum price")
+        
+        
+        
+        
+        
+        
+    return render_template('recommend_page.html', error = "")
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def user_data():

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Back to Wall Street</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/index.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/addStock.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='../static/recommend_page.css') }}" />
+    </head>
+    <!-- Holds Navigation Bar-->
+    <header>
+        <nav>
+            
+            <button class="navButt"><a href="{{ url_for('views.index') }}">Home</a></button>
+            <button class="navButt" ><a href="{{ url_for('views.recommend') }}">Recommendation</a></button>
+
+            <button class="navTit">Back Against Wall Street</button>
+        
+            <button class="navButt">
+                <a href="{{ url_for('views.addStock') }}">AddStock</a>
+            </button>
+            <button class="navButt">Help Desk</button>
+
+        </nav>
+    </header>
+    <body>
+        <!--Big Holder holds all contents of the Page-->
+                <div id="checkHolderTicker">
+                    <!--Forms which holds all text filter-->
+                    <form method="POST">
+                        <label for="min">Minimum Price:</label>
+                        <input id="min_text" name="min" type="text" class="input-field" placeholder="100.00">
+                        <br>
+                        <label for="max">Maximum Price:</label>
+                        <input id="max_text" name="max" type="text" class="input-field" placeholder="100.00">
+                        <br>
+                        <label for="trend">Trend:</label>
+                        <select id="trend_text" name="trend" type="text" class="input-field" placeholder="100.00">
+                        <option value="positive">Positive</option>
+                        <option value="negative">Negative</option>
+                        </select>
+                        <br>
+                        <button id="filter" name="filter" type="submit" class="submit-btn">Filter</button> 
+                        <br>
+                        <a class="input-field">{{error}}</a> 
+                    </form>
+                </div>
+                <div id= "plotID">
+                <img src="../images/plot1pic.png">
+
+                </div>
+
+    </body>
+
+</html>
