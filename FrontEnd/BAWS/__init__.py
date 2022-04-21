@@ -3,7 +3,7 @@ import pandas as pd
 from os import path
 import yfinance as yf
 import sys
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -49,10 +49,10 @@ def recommend():
 
             yearDF = yf.Ticker(chosen_stock).history(period = '1y')
             #plots closing value over time for chosen stock
-            plot1 = yearDF['Close'].plot.line()
-            plot1.set_ylabel('Dollars')
-            plot1.set_title(chosen_stock.upper() + " Stock Value")
-            plt.figure(plot1).savefig("../images/plot1pic.png")
+            plt.plot(yearDF.index, yearDF['Close'])
+            plt.ylabel('Dollars')
+            plt.title(chosen_stock.upper() + " Stock Value")
+            plt.savefig("FrontEnd\BAWS\images\plot1pic.png")
             return render_template('recommend_page.html', error = "")
         else:
             return render_template('recommend_page.html', error = "Please fill in minimum and maximum price")
