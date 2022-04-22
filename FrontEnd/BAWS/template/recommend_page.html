@@ -25,6 +25,7 @@
     </header>
     <body>
         <!--Big Holder holds all contents of the Page-->
+        
                 <div id="checkHolderTicker">
                     <!--Forms which holds all text filter-->
                     <form method="POST">
@@ -46,7 +47,7 @@
                     </form>
                 </div>
                 <div id= "plotID">
-                <img src="{{url_for('images', filename='plot1pic.png')}}">
+                <img id="reccImage" src="{{url_for('static', filename='/images/plot1pic.png')}}">
 
                 </div>
 

@@ -1,10 +1,10 @@
 #plotID{
     position:fixed;
     float: right;
-    top:40%;
+    top:25%;
     right: 10%;
-    height: 30%;
-    width: 30%;
+    width: 640px;
+    height:480px;
 }
 #min_text{
     width: 50%;
