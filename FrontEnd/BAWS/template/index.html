@@ -41,36 +41,12 @@
                     <tr>
                         <th>Best Stocks</th>
                     </tr>
+                    {% for count in range(tick|length) %}
                     <tr>
-                        <td>1. Stock</td>
+                        <td>{{count + 1}}.) {{tick[count]}}</td>
                     </tr>
-                    <tr>
-                        <td>2. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>3. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>4. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>5. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>6. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>7. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>8. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>9. Stock</td>
-                    </tr>
-                    <tr>
-                        <td>10. Stock</td>
-                    </tr>
+                    {% endfor %}
+                    
                 </table>
             </div>
         </div>
