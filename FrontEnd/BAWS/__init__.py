@@ -22,6 +22,27 @@ def getLoginData():
 
 @app.route('/index', methods=['GET', 'POST'])
 def home():
+    #ticker_list gives the list of stocks 
+    tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
+       
+    #searches yahoo finance for tickers from the ticker_list
+    tickers = yf.Tickers(tickers_list)
+    #prints the list of tickers from tickers
+    print(tickers, file =sys.stderr) 
+    
+    #downloads everything to do with tickers into the code so that we can use it
+    df = tickers.download(group_by='ticker')
+    
+    
+    if request.form.get('test1'):
+        # Activate Test 1
+        print('Test 1 Activated')
+    
+    if request.form.get('test2'):
+        # Activate Test 2
+        print('Test 2 Activated')
+    
+    
     return render_template('index.html')
 
 
