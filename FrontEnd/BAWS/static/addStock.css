@@ -20,6 +20,12 @@
     top: 40%;
 }
 
+#ticker_img {
+    position: fixed;
+    left: 45%;
+    top: 25%;
+}
+
 #AddToList {
     position: fixed;
     left: 10.2%;
@@ -29,13 +35,13 @@
 }
 
 #checkHolderTicker {
-    position: fixed; 
+    position: fixed;
     top: 30%;
     left: 5%;
 }
 
 #checkHolderWatchList {
-    position: fixed; 
+    position: fixed;
     top: 57%;
     left: 15%;
 }
@@ -43,7 +49,7 @@
 #bigHolderStock {
     width: 40%;
     height: 35%;
-    position: fixed; 
+    position: fixed;
     top: 64%;
     left: -5%;
 }
@@ -53,6 +59,7 @@
     width: 25%;
     float: left;
 }
+
 label {
     font-size: 20px;
 }
