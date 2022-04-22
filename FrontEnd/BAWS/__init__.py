@@ -106,7 +106,7 @@ def stock_search():
         #prints the info for the stock that the user typed in (SUPPOSED TO!!)
         print(df[text.upper()], file =sys.stderr)
         #df.plot.line()
-        return render_template("addStock.html")
+        return render_template("addStock.html", tick = tickers_list)
     return render_template("addStock.html")
 
 def create_app():
