@@ -1,10 +1,13 @@
+import imp
 from flask import Flask, render_template, request, Blueprint, redirect, url_for
 import pandas as pd
 from os import path
 import yfinance as yf
+import random
 import sys
 import matplotlib.pyplot as plt
-
+from BAWS import getStockInfo
+import time
 app = Flask(__name__)
 
 @app.route('/', methods = ["GET", "POST"])
@@ -83,11 +86,15 @@ def user_data():
 
 @app.route('/addStock', methods=['GET', 'POST'])
 def stock_search():
+    tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
+        
     if request.method == 'POST':
         #ticker_list gives the list of stocks 
-        tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
         #text is the stock that the user input
         text = str(request.form['Tickers'])
+
+        getStockInfo.generate_graph(text)
+        time.sleep(7) # ensure the image is generated
         
         #print to see what the user has typed
         print("The text is: ", text, file =sys.stderr)
@@ -106,8 +113,8 @@ def stock_search():
         #prints the info for the stock that the user typed in (SUPPOSED TO!!)
         print(df[text.upper()], file =sys.stderr)
         #df.plot.line()
-        return render_template("addStock.html", tick = tickers_list)
-    return render_template("addStock.html")
+        return render_template("addStock.html", tick = tickers_list, text = text)
+    return render_template("addStock.html", tick = random.sample(tickers_list, 5))
 
 def create_app():
     

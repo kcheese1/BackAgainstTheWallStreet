@@ -45,8 +45,18 @@
                 <!--Table which holds list of Stocks-->
                 <table>
                     <tr>
-                        <th>Best Stocks</th>
+                        <th>Best Stocks</th>    
                     </tr>
+                    {% for count in range(tick|length) %}
+                    <tr>
+                        <td>{{count + 1}}.) {{tick[count]}}</td>
+                    </tr>
+                    {% endfor %}
+                    <!--TODO: clean the below up-->
+                    {% if text is defined %}
+                        <img src="{{ url_for('static', filename = text+'.png') }}" alt="AAPL ticker info">
+                    {% endif %}
+                    <!--
                     <tr>
                         <td>1.) {{tick[0]}}</td>
                     </tr>
@@ -62,6 +72,7 @@
                     <tr>
                         <td>5.) {{tick[4]}}</td>
                     </tr>
+                    -->
                 </table>
             </div>
         </div>
