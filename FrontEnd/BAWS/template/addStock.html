@@ -54,7 +54,9 @@
                     {% endfor %}
                     <!--TODO: clean the below up-->
                     {% if text is defined %}
+                    <div id="ticker_img">
                         <img src="{{ url_for('static', filename = text+'.png') }}" alt="AAPL ticker info">
+                    </div>
                     {% endif %}
                     <!--
                     <tr>
