@@ -1,10 +1,13 @@
+import imp
 from flask import Flask, render_template, request, Blueprint, redirect, url_for
 import pandas as pd
 from os import path
 import yfinance as yf
+import random
 import sys
-import matplotlib as plt
-
+import matplotlib.pyplot as plt
+from BAWS import getStockInfo
+import time
 app = Flask(__name__)
 
 @app.route('/', methods = ["GET", "POST"])
@@ -32,7 +35,7 @@ def home():
     
     #downloads everything to do with tickers into the code so that we can use it
     df = tickers.download(group_by='ticker')
-    
+      
     
     if request.form.get('test1'):
         # Activate Test 1
@@ -43,7 +46,7 @@ def home():
         print('Test 2 Activated')
     
     
-    return render_template('index.html')
+    return render_template('index.html', tick = random.sample(tickers_list, 10))
 
 
 @app.route('/recommend', methods=['GET', 'POST'])
@@ -70,10 +73,10 @@ def recommend():
 
             yearDF = yf.Ticker(chosen_stock).history(period = '1y')
             #plots closing value over time for chosen stock
-            plot1 = yearDF['Close'].plot.line()
-            plot1.set_ylabel('Dollars')
-            plot1.set_title(chosen_stock.upper() + " Stock Value")
-            plt.figure(plot1).savefig("../images/plot1pic.png")
+            plt.plot(yearDF.index, yearDF['Close'])
+            plt.ylabel('Dollars')
+            plt.title(chosen_stock.upper() + " Stock Value")
+            plt.savefig("FrontEnd\BAWS\images\plot1pic.png")
             return render_template('recommend_page.html', error = "")
         else:
             return render_template('recommend_page.html', error = "Please fill in minimum and maximum price")
@@ -104,11 +107,15 @@ def user_data():
 
 @app.route('/addStock', methods=['GET', 'POST'])
 def stock_search():
+    tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
+        
     if request.method == 'POST':
         #ticker_list gives the list of stocks 
-        tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
         #text is the stock that the user input
         text = str(request.form['Tickers'])
+
+        getStockInfo.generate_graph(text)
+        time.sleep(7) # ensure the image is generated
         
         #print to see what the user has typed
         print("The text is: ", text, file =sys.stderr)
@@ -127,8 +134,8 @@ def stock_search():
         #prints the info for the stock that the user typed in (SUPPOSED TO!!)
         print(df[text.upper()], file =sys.stderr)
         #df.plot.line()
-        return render_template("addStock.html")
-    return render_template("addStock.html")
+        return render_template("addStock.html", tick = tickers_list, text = text)
+    return render_template("addStock.html", tick = random.sample(tickers_list, 5))
 
 def create_app():
     
