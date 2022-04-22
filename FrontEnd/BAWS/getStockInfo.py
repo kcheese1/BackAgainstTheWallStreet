@@ -58,15 +58,11 @@ def generate_graph(tick: str):
     if(tick in tickers_list):
         print("showing tick")
         print(df[tick])
-        sub = df[tick] # grabs teh sub item
-        sub.plot(
-            kind = "scatter",
-            x = "Open",
-            y = "Close",
-            color = "green"
-        ) # makes a basic plot
-
+        sub = yf.Ticker(tick).history(period = '1y') # grabs the sub item
+        plt.clf()
+        plt.plot(sub.index, sub['Close'])
+        plt.ylabel('Dollars')
+        plt.xlabel('Date')
         plt.title = f'{tick} time X value' # names the image
-
         # TODO:decide where it will save
         plt.savefig(f"FrontEnd/BAWS/static/{tick}.png"); # saves the figure

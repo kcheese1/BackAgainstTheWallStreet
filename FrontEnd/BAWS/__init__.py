@@ -118,7 +118,7 @@ def stock_search():
         text = str(request.form['Tickers'])
 
         getStockInfo.generate_graph(text)
-        time.sleep(7) # ensure the image is generated
+        #time.sleep(7) # ensure the image is generated
         
         #print to see what the user has typed
         print("The text is: ", text, file =sys.stderr)
