@@ -62,8 +62,8 @@ def recommend():
         if min != '' and max != '':
             chosen_stock = ''
             yearDF = pd.DataFrame()
-            tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx',
-                                'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
+            tickers_list = ['AAPL', 'EBAY', 'NUE', 'F', 'TME', 'TWTR', 'RBLX',
+                                'PFE', 'T', 'WFC', 'MSFT', 'INTC', 'TSLA', 'PYPL', 'HOOD', 'DIS']
             for tick in tickers_list:
                 onDayDF = yf.Ticker(tick).history(period='1d')
                 if float(max) >= onDayDF['Close'][-1] >= float(min):
@@ -78,7 +78,7 @@ def recommend():
             plt.clf()
             plt.plot(yearDF.index, yearDF['Close'])
             plt.ylabel('Dollars')
-            plt.title(chosen_stock.upper() + " Stock Value")
+            plt.title(chosen_stock + " Stock Value")
             plt.savefig("FrontEnd\BAWS\static\images\plot1pic.png")
             return render_template('recommend_page.html', error = "")
         else:
