@@ -28,7 +28,7 @@ def getLoginData():
 @app.route('/index', methods=['GET', 'POST'])
 def home():
     #ticker_list gives the list of stocks 
-    tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
+    tickers_list = ['AAPL', 'EBAY', 'NUE', 'F', 'TME', 'TWTR', 'RBLX', 'PFE', 'T', 'WFC', 'MSFT', 'INTC', 'TSLA', 'PYPL', 'HOOD', 'DIS']
        
     #searches yahoo finance for tickers from the ticker_list
     tickers = yf.Tickers(tickers_list)
