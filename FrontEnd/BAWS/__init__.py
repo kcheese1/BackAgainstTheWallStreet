@@ -29,7 +29,18 @@ def getLoginData():
 def home():
     #ticker_list gives the list of stocks 
     tickers_list = ['AAPL', 'EBAY', 'NUE', 'F', 'TME', 'TWTR', 'RBLX', 'PFE', 'T', 'WFC', 'MSFT', 'INTC', 'TSLA', 'PYPL', 'HOOD', 'DIS']
-       
+    
+    # List that Compares Present Day Stock Price to Previous Day's Stock Price
+    shortTermTrend = []
+    
+    # List that Compares Present Day Stock Price to Last Month's Stock Price
+    longTermTrend = [] 
+    
+    # List of Stocks to Display
+    display_list = []
+    
+    number_array = [0,1,2,3,4,5,6,7,8,9]
+    
     #searches yahoo finance for tickers from the ticker_list
     tickers = yf.Tickers(tickers_list)
     #prints the list of tickers from tickers
@@ -37,18 +48,70 @@ def home():
     
     #downloads everything to do with tickers into the code so that we can use it
     df = tickers.download(group_by='ticker')
-      
     
-    if request.form.get('test1'):
-        # Activate Test 1
-        print('Test 1 Activated')
+    for x in tickers_list:
+        shortchang = ((df[x]['Close'][21]) - (df[x]['Close'][20])) # Contains Change of Stock from Previous Day
+        # Puts Variables into List
+        shortTermTrend.append(
+            {
+                'Ticker': x,
+                'Change': shortchang
+            }
+        )
     
-    if request.form.get('test2'):
-        # Activate Test 2
-        print('Test 2 Activated')
+    # Creates Dataframe
+    shortTermTrend = pd.DataFrame(shortTermTrend)
+    # Sort values from highest to lowest
+    shortTermTrend = shortTermTrend.sort_values(by='Change', ascending=False)
+    # Changes index to reflex sorted values
+    shortTermTrend = shortTermTrend.reset_index(drop=True)
+    
+    for x in tickers_list:
+        longchang = ((df[x]['Close'][21]) - (df[x]['Close'][0])) # Contains Change of Stock from Previous Month
+        # Puts Variables into List
+        longTermTrend.append(
+            {
+                'Ticker': x,
+                'Change': longchang
+            }
+        )
+    
+    # Creates Dataframe
+    longTermTrend = pd.DataFrame(longTermTrend)
+    # Sort values from highest to lowest
+    longTermTrend = longTermTrend.sort_values(by='Change', ascending=False)
+    # Changes index to reflex sorted values
+    longTermTrend = longTermTrend.reset_index(drop=True)
+    
+    # Displays Random set of Stocks
+    display_list = random.sample(tickers_list, 10)
+    
+    if request.method == 'POST': 
+
+        if request.form.get('test1'):
+            # Activate Test 1
+            print(shortTermTrend)
+
+            for y in number_array:
+                display_list[y] = shortTermTrend['Ticker'][y]
+        
+        if request.form.get('test2'):
+            # Activate Test 2
+            print('Test 2 Activated')
+            print(longTermTrend)
+            
+            for y in number_array:
+                display_list[y] = longTermTrend['Ticker'][y]
+    
+        if request.form.get('test3'):
+            # Activate Test 2
+            print('Test 3 Activated')
+            
+            for y in number_array:
+                display_list[y] = "Mike Baran"
     
     
-    return render_template('index.html', tick = random.sample(tickers_list, 10))
+    return render_template('index.html', tick = display_list) #random.sample(tickers_list, 10))
 
 
 @app.route('/recommend', methods=['GET', 'POST'])
