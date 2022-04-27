@@ -141,7 +141,10 @@ def recommend():
             plt.clf()
             plt.plot(yearDF.index, yearDF['Close'])
             plt.ylabel('Dollars')
-            plt.title(chosen_stock + " Stock Value")
+            try:
+                plt.title(yf.Ticker(chosen_stock).info['longName'] + "(" + chosen_stock +")")
+            except:
+                print("no value in chosen_stock")
             plt.savefig("FrontEnd\BAWS\static\images\plot1pic.png")
             return render_template('recommend_page.html', error = "")
         else:
