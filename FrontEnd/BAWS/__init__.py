@@ -108,7 +108,7 @@ def home():
             print('Test 3 Activated')
             
             for y in number_array:
-                display_list[y] = "Mike Baran"
+                display_list[y] = "Not Mike"
     
     
     return render_template('index.html', tick = display_list) #random.sample(tickers_list, 10))
