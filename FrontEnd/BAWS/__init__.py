@@ -50,7 +50,7 @@ def home():
     df = tickers.download(group_by='ticker')
     
     for x in tickers_list:
-        shortchang = ((df[x]['Close'][21]) - (df[x]['Close'][20])) # Contains Change of Stock from Previous Day
+        shortchang = ((df[x]['Close'][20]) - (df[x]['Close'][19])) # Contains Change of Stock from Previous Day
         # Puts Variables into List
         shortTermTrend.append(
             {
@@ -67,7 +67,7 @@ def home():
     shortTermTrend = shortTermTrend.reset_index(drop=True)
     
     for x in tickers_list:
-        longchang = ((df[x]['Close'][21]) - (df[x]['Close'][0])) # Contains Change of Stock from Previous Month
+        longchang = ((df[x]['Close'][20]) - (df[x]['Close'][0])) # Contains Change of Stock from Previous Month
         # Puts Variables into List
         longTermTrend.append(
             {
@@ -176,13 +176,14 @@ def user_data():
 
 @app.route('/addStock', methods=['GET', 'POST'])
 def stock_search():
+    watch_list = []
     tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
-        
     if request.method == 'POST':
         #ticker_list gives the list of stocks 
         #text is the stock that the user input
         text = str(request.form['Tickers'])
-
+        watch_list.append(text)
+        
         getStockInfo.generate_graph(text)
         #time.sleep(7) # ensure the image is generated
         
@@ -203,8 +204,8 @@ def stock_search():
         #prints the info for the stock that the user typed in (SUPPOSED TO!!)
         print(df[text.upper()], file =sys.stderr)
         #df.plot.line()
-        return render_template("addStock.html", tick = random.sample(tickers_list, 5), text = text)
-    return render_template("addStock.html", tick = random.sample(tickers_list, 5))
+        return render_template("addStock.html", tick = watch_list, text = text)
+    return render_template("addStock.html", tick = watch_list)
 
 def create_app():
     
