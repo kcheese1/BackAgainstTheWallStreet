@@ -63,6 +63,21 @@ def generate_graph(tick: str):
         plt.plot(sub.index, sub['Close'])
         plt.ylabel('Dollars')
         plt.xlabel('Date')
-        plt.title = f'{tick} time X value' # names the image
+        try:
+            plt.title(yf.Ticker(tick).info['longName'] + "(" + tick +")")
+        except:
+            print("no value in chosen_stock")
+        # TODO:decide where it will save
+        plt.savefig(f"FrontEnd/BAWS/static/{tick}.png"); # saves the figure
+    else:
+        sub = yf.Ticker(tick).history(period = '1y') # grabs the sub item
+        plt.clf()
+        plt.plot(sub.index, sub['Close'])
+        plt.ylabel('Dollars')
+        plt.xlabel('Date')
+        try:
+            plt.title(yf.Ticker(tick).info['longName'] + "(" + tick +")")
+        except:
+            print("no value in chosen_stock")
         # TODO:decide where it will save
         plt.savefig(f"FrontEnd/BAWS/static/{tick}.png"); # saves the figure
