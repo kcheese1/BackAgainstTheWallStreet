@@ -176,6 +176,7 @@ def user_data():
 
 @app.route('/addStock', methods=['GET', 'POST'])
 def stock_search():
+    watch_list_file = pd.read_csv('FrontEnd/BAWS/FileStorage/watchStocks.csv')
     watch_list = []
     tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
     if request.method == 'POST':
@@ -202,9 +203,11 @@ def stock_search():
         print(tickers, file =sys.stderr)
         #adds whatever the user typed into the ticker_list
         tickers_list.append(text)
-        #prints the list with the added ticker
-        print(tickers_list, file =sys.stderr)
-        #df.plot.line()
+        input_data = pd.DataFrame()
+        input_data['Tickers'] = [text]
+        watch_list_file = input_data
+        print(watch_list_file["Tickers"][0], file=sys.stderr)
+        watch_list_file.to_csv('FrontEnd/BAWS/FileStorage/watchStocks.csv', index=False)
         return render_template("addStock.html", tick = watch_list, text = text)
     return render_template("addStock.html", tick = watch_list)
 
