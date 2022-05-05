@@ -50,7 +50,7 @@ def home():
     df = tickers.download(group_by='ticker')
     
     for x in tickers_list:
-        shortchang = ((df[x]['Close'][20]) - (df[x]['Close'][19])) # Contains Change of Stock from Previous Day
+        shortchang = ((df[x]['Close'][19]) - (df[x]['Close'][18])) # Contains Change of Stock from Previous Day
         # Puts Variables into List
         shortTermTrend.append(
             {
@@ -67,7 +67,7 @@ def home():
     shortTermTrend = shortTermTrend.reset_index(drop=True)
     
     for x in tickers_list:
-        longchang = ((df[x]['Close'][20]) - (df[x]['Close'][0])) # Contains Change of Stock from Previous Month
+        longchang = ((df[x]['Close'][19]) - (df[x]['Close'][0])) # Contains Change of Stock from Previous Month
         # Puts Variables into List
         longTermTrend.append(
             {

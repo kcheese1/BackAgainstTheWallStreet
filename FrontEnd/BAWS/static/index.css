@@ -1,13 +1,13 @@
 body, html{
     margin: 0;
     padding: 0;
-    background-color: #444444;
+    background-color: #030083;
 }
 
 header{
     width: 100%;
     height: 120px;
-    background-color: #282828;
+    background-color: #41A950;
 }
 
 h1 {
@@ -44,7 +44,7 @@ a:hover {
 .navButt {
     text-decoration: none;
     border: 2px solid #222222;
-    background-color: #444444;
+    background-color: #41A950;
     color: #ffffff;
     text-align: center;
     font-size: 18px;
@@ -54,14 +54,14 @@ a:hover {
 }
 
 .navButt:hover {
-    background-color: #333333;
+    background-color: #278036;
     transition: 0.5s;
 }
 
 .navTit {
     text-decoration: none;
     border: 2px solid #222222;
-    background-color: #444444;
+    background-color: #41A950;
     color: #ffffff;
     text-align: center;
     font-size: 26px;
@@ -71,7 +71,7 @@ a:hover {
 }
 
 #bigHolder {
-    background-color: #555555;
+    background-color: #1773D1;
     width: 90%;
     height: 75%;
     position: fixed; 
@@ -110,9 +110,22 @@ table {
     width: 100%;
     height: 100%;
     border-collapse: collapse;
+    background-color: #1773D1;
 }
 
 table, th, td {
     text-align: center;
     border: 1px solid;
-  }
+}
+
+label {
+    color: #ffffff;
+}
+
+th {
+    color: #ffffff;
+}
+
+td {
+    color: #ffffff;
+}
