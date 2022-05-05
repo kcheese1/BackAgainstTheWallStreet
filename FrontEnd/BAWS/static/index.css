@@ -1,10 +1,11 @@
-body, html{
+body,
+html {
     margin: 0;
     padding: 0;
     background-color: #030083;
 }
 
-header{
+header {
     width: 100%;
     height: 120px;
     background-color: #41A950;
@@ -12,10 +13,10 @@ header{
 
 h1 {
     position: absolute;
-    float:left;
+    float: left;
 }
 
-span{
+span {
     background-color: #444444;
 }
 
@@ -30,7 +31,7 @@ li {
     padding: 15px 30px;
 }
 
-a { 
+a {
     text-align: center;
     color: #ffffff;
     text-decoration: none;
@@ -74,7 +75,7 @@ a:hover {
     background-color: #1773D1;
     width: 90%;
     height: 75%;
-    position: fixed; 
+    position: fixed;
     top: 20%;
     left: 5%;
 }
@@ -86,7 +87,7 @@ a:hover {
 }
 
 #checkHolder {
-    position: fixed; 
+    position: fixed;
     top: 40%;
     left: 10%;
 }
@@ -113,9 +114,12 @@ table {
     background-color: #1773D1;
 }
 
-table, th, td {
+table,
+th,
+td {
     text-align: center;
     border: 1px solid;
+<<<<<<< HEAD
 }
 
 label {
@@ -128,4 +132,6 @@ th {
 
 td {
     color: #ffffff;
+=======
+>>>>>>> a5ed464d5edb7e6623eb34e839ef30300256db5b
 }

@@ -1,0 +1,30 @@
+.helpTitle {
+    text-decoration: underline;
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+    width: 100%;
+    height: 100px;
+    float: center;
+    top: 20%;
+}
+
+.helpPhone {
+    color: #ffffff;
+    text-align: center;
+    font-size: 40px;
+    float: center;
+    width: 100%;
+    height: 100px;
+    top: 40%;
+}
+
+.helpEmail {
+    color: #ffffff;
+    text-align: center;
+    font-size: 40px;
+    float: center;
+    width: 100%;
+    height: 100px;
+    top: 55%;
+}

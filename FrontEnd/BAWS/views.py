@@ -18,6 +18,10 @@ def index():
 def addStock():
     return render_template("addStock.html")
 
+@views.route('/helpDesk')
+def helpDesk():
+    return render_template("helpDesk.html")
+
 @views.route('/recommend')
 def recommend():
     return render_template("recommend_page.html")
