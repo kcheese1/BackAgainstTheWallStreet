@@ -9,6 +9,7 @@ header {
     width: 100%;
     height: 120px;
     background-color: #41A950;
+    min-width: 1600px;
 }
 
 h1 {
@@ -78,6 +79,7 @@ a:hover {
     position: fixed;
     top: 20%;
     left: 5%;
+    min-width: 1440px;
 }
 
 #theChecks {
@@ -112,6 +114,7 @@ table {
     height: 100%;
     border-collapse: collapse;
     background-color: #1773D1;
+    /*min-width: 1600px;*/
 }
 
 table,
@@ -119,7 +122,6 @@ th,
 td {
     text-align: center;
     border: 1px solid;
-<<<<<<< HEAD
 }
 
 label {
@@ -132,6 +134,4 @@ th {
 
 td {
     color: #ffffff;
-=======
->>>>>>> a5ed464d5edb7e6623eb34e839ef30300256db5b
 }
