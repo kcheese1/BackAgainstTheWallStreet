@@ -50,7 +50,7 @@ def home():
     df = tickers.download(group_by='ticker')
     
     for x in tickers_list:
-        shortchang = ((df[x]['Close'][20]) - (df[x]['Close'][19])) # Contains Change of Stock from Previous Day
+        shortchang = ((df[x]['Close'][19]) - (df[x]['Close'][18])) # Contains Change of Stock from Previous Day
         # Puts Variables into List
         shortTermTrend.append(
             {
@@ -67,7 +67,7 @@ def home():
     shortTermTrend = shortTermTrend.reset_index(drop=True)
     
     for x in tickers_list:
-        longchang = ((df[x]['Close'][20]) - (df[x]['Close'][0])) # Contains Change of Stock from Previous Month
+        longchang = ((df[x]['Close'][19]) - (df[x]['Close'][0])) # Contains Change of Stock from Previous Month
         # Puts Variables into List
         longTermTrend.append(
             {
@@ -176,6 +176,7 @@ def user_data():
 
 @app.route('/addStock', methods=['GET', 'POST'])
 def stock_search():
+    watch_list_file = pd.read_csv('FrontEnd/BAWS/FileStorage/watchStocks.csv')
     watch_list = []
     tickers_list = ['aapl', 'ebay', 'nue', 'f', 'tme', 'twtr', 'rblx', 'pfe', 't', 'wfc', 'msft', 'intc', 'tsla', 'pypl', 'hood', 'dis']
     if request.method == 'POST':
@@ -185,25 +186,28 @@ def stock_search():
         watch_list.append(text)
         
         getStockInfo.generate_graph(text)
-        #time.sleep(7) # ensure the image is generated
         
         #print to see what the user has typed
         print("The text is: ", text, file =sys.stderr)
         
-        #searches yahoo finance for tickers from the ticker_list
-        tickers = yf.Tickers(tickers_list)
+        if text in tickers_list:
+            #searches yahoo finance for tickers from the ticker_list 
+            tickers = yf.Tickers(tickers_list)
+             #downloads everything to do with tickers into the code so that we can use it
+            df = tickers.download(group_by='ticker')
+            #prints the info for the stock that the user typed in (SUPPOSED TO!!)
+            print(df[text.upper()], file =sys.stderr)
+        else:
+            tickers = yf.Ticker(text).history(period = '1y')
         #prints the list of tickers from tickers
         print(tickers, file =sys.stderr)
         #adds whatever the user typed into the ticker_list
         tickers_list.append(text)
-        #prints the list with the added ticker
-        print(tickers_list, file =sys.stderr)
-        
-        #downloads everything to do with tickers into the code so that we can use it
-        df = tickers.download(group_by='ticker')
-        #prints the info for the stock that the user typed in (SUPPOSED TO!!)
-        print(df[text.upper()], file =sys.stderr)
-        #df.plot.line()
+        input_data = pd.DataFrame()
+        input_data['Tickers'] = [text]
+        watch_list_file = input_data
+        print(watch_list_file["Tickers"][0], file=sys.stderr)
+        watch_list_file.to_csv('FrontEnd/BAWS/FileStorage/watchStocks.csv', index=False)
         return render_template("addStock.html", tick = watch_list, text = text)
     return render_template("addStock.html", tick = watch_list)
 
