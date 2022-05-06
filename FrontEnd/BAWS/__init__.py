@@ -116,6 +116,7 @@ def home():
 
 @app.route('/recommend', methods=['GET', 'POST'])
 def recommend():
+    watch_list_file = pd.DataFrame()
     if request.method == 'POST':
         min = request.form['min']
         max = request.form['max']
@@ -134,6 +135,15 @@ def recommend():
                     yearDF = yf.Ticker(tick).history(period = '1y')
                     if (trend == 'positive' and yearDF['Close'][0] < yearDF['Close'][-1]) or (trend == 'negative' and yearDF['Close'][0] > yearDF['Close'][-1]):
                         chosen_stock = tick
+            try:
+                watch_list_file = pd.read_csv('FrontEnd/BAWS/FileStorage/watchStocks.csv')  
+                print(watch_list_file["Tickers"][0], file=sys.stderr)
+                yearDF = yf.Ticker(watch_list_file["Tickers"][0]).history(period = '1y')
+                if (trend == 'positive' and yearDF['Close'][0] < yearDF['Close'][-1]) or (trend == 'negative' and yearDF['Close'][0] > yearDF['Close'][-1]):
+                    chosen_stock = watch_list_file["Tickers"][0]
+            except:
+                print(watch_list_file, file=sys.stderr)
+        
         
 
             yearDF = yf.Ticker(chosen_stock).history(period = '1y')
