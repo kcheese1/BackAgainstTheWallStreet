@@ -180,10 +180,13 @@ def recommend():
 @app.route('/sign_up', methods=['GET', 'POST'])
 def user_data():
     if request.method == 'POST':
+        #reads user.csv file
         sign_up_file = pd.read_csv('FrontEnd/BAWS/FileStorage/user.csv')
+        #requests forms for sign up credentials
         USERNAME = str(request.form['Username'])
         PASSWORD = str(request.form['Password'])
         REPASSWORD = str(request.form['RePassword'])
+        #if the user's password and repassword are the same, they are allowed to make a new account
         if REPASSWORD == PASSWORD:
             input_data = pd.DataFrame()
             input_data['Username'] = [USERNAME]
@@ -228,6 +231,7 @@ def stock_search():
         watch_list_file = input_data
         print(watch_list_file["Tickers"][0], file=sys.stderr)
         watch_list_file.to_csv('FrontEnd/BAWS/FileStorage/watchStocks.csv', index=False)
+        #returns to addstock with watchlist and text the user typed
         return render_template("addStock.html", tick = watch_list, text = text)
     return render_template("addStock.html", tick = watch_list)
 
