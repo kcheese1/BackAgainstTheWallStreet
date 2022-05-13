@@ -1,4 +1,3 @@
-import imp
 from flask import Flask, render_template, request, Blueprint, redirect, url_for
 import pandas as pd
 from os import path
@@ -9,9 +8,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from BAWS import getStockInfo
-import time
 app = Flask(__name__)
 
+#login page route
 @app.route('/', methods = ["GET", "POST"])
 def getLoginData():
     if request.method == 'POST':
@@ -24,7 +23,7 @@ def getLoginData():
     
     return render_template("loginPage.html")
 
-
+#home page route
 @app.route('/index', methods=['GET', 'POST'])
 def home():
     #ticker_list gives the list of stocks 
@@ -113,29 +112,40 @@ def home():
     
     return render_template('index.html', tick = display_list) #random.sample(tickers_list, 10))
 
-
+#recommendation page route
 @app.route('/recommend', methods=['GET', 'POST'])
+#define what the recommendation page does
 def recommend():
+    #holds information pulled from watchStocks.csv
     watch_list_file = pd.DataFrame()
+    #when filter button is clicked
     if request.method == 'POST':
+        #take in information input in the text fields
         min = request.form['min']
         max = request.form['max']
         trend = request.form.get('trend')
-        print("variables: " + min + max + trend,file=sys.stderr)
         
+        #check in and max are not empty
         if min != '' and max != '':
             chosen_stock = ''
             yearDF = pd.DataFrame()
             tickers_list = ['AAPL', 'EBAY', 'NUE', 'F', 'TME', 'TWTR', 'RBLX',
                                 'PFE', 'T', 'WFC', 'MSFT', 'INTC', 'TSLA', 'PYPL', 'HOOD', 'DIS']
+            #check for stocks that match criteria
             for tick in tickers_list:
                 onDayDF = yf.Ticker(tick).history(period='1d')
+                #if stock greater than min and less that max
                 if float(max) >= onDayDF['Close'][-1] >= float(min):
         
                     yearDF = yf.Ticker(tick).history(period = '1y')
-                    if (trend == 'positive' and yearDF['Close'][0] < yearDF['Close'][-1]) or (trend == 'negative' and yearDF['Close'][0] > yearDF['Close'][-1]):
+                    #and if the trend of the stock matches the desired trend
+                    if (trend == 'positive' and yearDF['Close'][0] < 
+                        yearDF['Close'][-1]) or (trend == 'negative' and yearDF['Close'][0] > 
+                                                 yearDF['Close'][-1]):
+                        #select the stock to recommend
                         chosen_stock = tick
             try:
+                #repeat the process above for the stock on the watchlist
                 watch_list_file = pd.read_csv('FrontEnd/BAWS/FileStorage/watchStocks.csv')  
                 print(watch_list_file["Tickers"][0], file=sys.stderr)
                 yearDF = yf.Ticker(watch_list_file["Tickers"][0]).history(period = '1y')
@@ -145,7 +155,7 @@ def recommend():
                 print(watch_list_file, file=sys.stderr)
         
         
-
+            #download the one year table of stock values 
             yearDF = yf.Ticker(chosen_stock).history(period = '1y')
             #plots closing value over time for chosen stock
             plt.clf()
